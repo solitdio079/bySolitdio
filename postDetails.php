@@ -710,7 +710,6 @@ if (!isset($_GET["id"])) {
             }, function(data) {
                 if (data === "No posts!") {
                     document.getElementById("commentTitle").textContent = `0 Comments`
-
                 } else if (isJson(data)) {
                     const comments = JSON.parse(data)
                     document.getElementById("commentTitle").textContent = `${comments.length} Comments`
