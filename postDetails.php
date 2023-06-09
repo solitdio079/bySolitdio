@@ -1,4 +1,5 @@
 <?php
+session_start();
 if (!isset($_GET["id"])) {
     header("Location: login.php");
 }
@@ -125,7 +126,7 @@ if (!isset($_GET["id"])) {
                                 </div> <!--/-->
 
                                 <!--next & previous-posts-->
-                                <div class="row">
+                                <!--  <div class="row">
                                     <div class="col-md-6">
                                         <div class="widget">
                                             <div class="widget-next-post">
@@ -162,15 +163,15 @@ if (!isset($_GET["id"])) {
                                             </div>
                                         </div>
                                     </div>
-                                </div><!--/-->
+                                </div>/-->
 
                                 <!--widget-comments-->
                                 <div class="widget mb-50">
                                     <div class="widget-comments">
                                         <div class="title">
-                                            <h5>3 Comments</h5>
+                                            <h5 id="commentTitle">3 Comments</h5>
                                         </div>
-                                        <ul class="widget-comments-items">
+                                        <ul class="widget-comments-items" id="commentsContainer">
                                             <li class="comment-item">
                                                 <img src="assets/img/user/1.jpg" alt="">
                                                 <div class="content">
@@ -227,48 +228,42 @@ if (!isset($_GET["id"])) {
                                     </div>
 
                                     <!--Leave-comments-->
-                                    <div class="widget-form">
-                                        <div class="title">
-                                            <h5>Leave a Reply</h5>
+                                    <?php
+                                    if (isset($_SESSION["user"])) {
+
+
+                                    ?>
+                                        <div class="widget-form">
+                                            <div class="title">
+                                                <h5>Leave a Reply</h5>
+                                            </div>
+                                            <form class="sign-form" action="#" method="POST" id="addCommentForm">
+
+                                                <div class="alert alert-success contact_msg" id="commentSuccess" style="display: none" role="alert">
+                                                    Your message was sent successfully.
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <div class="form-group">
+                                                            <textarea name="message" id="message" cols="30" rows="5" class="form-control" placeholder="Message*" required></textarea>
+                                                        </div>
+                                                    </div>
+                                                    <input type="hidden" id="commentAuth" value="<?php echo $_SESSION["user"]["id"] ?>">
+                                                    <input type="hidden" id="commentParent" value="0">
+
+
+
+                                                    <div class="col-12">
+                                                        <button type="submit" id="addCommentBtn" name="submit" class="btn-custom">
+                                                            Send Comment
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </form>
                                         </div>
-                                        <form class="widget-contact-form" action="#" method="POST" id="main_contact_form">
-                                            <p>Your email adress will not be published ,Requied fileds are marked*.</p>
-                                            <div class="alert alert-success contact_msg" style="display: none" role="alert">
-                                                Your message was sent successfully.
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <div class="form-group">
-                                                        <textarea name="message" id="message" cols="30" rows="5" class="form-control" placeholder="Message*" required="required"></textarea>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <input type="text" name="name" id="name" class="form-control" placeholder="Name*" required="required">
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <input type="email" name="email" id="email" class="form-control" placeholder="Email*" required="required">
-                                                    </div>
-                                                </div>
-                                                <div class="col-12 mb-20">
-                                                    <div class="form-group">
-                                                        <input type="text" name="website" id="website" class="form-control" placeholder="website">
-                                                    </div>
-                                                    <label>
-                                                        <input name="name" type="checkbox" value="1" required="required">
-                                                        <span>save my name , email and website in this browser for the next time I comment.</span>
-                                                    </label>
-                                                </div>
-                                                <div class="col-12">
-                                                    <button type="submit" name="submit" class="btn-custom">
-                                                        Send Comment
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </div>
+                                    <?php
+                                    }
+                                    ?>
 
                                 </div>
                             </div>
@@ -281,16 +276,15 @@ if (!isset($_GET["id"])) {
                                 <div class="widget">
                                     <div class="widget-author">
                                         <div class="author-img">
-                                            <a href="author.html" class="image">
-                                                <img src="assets/img/author/1.jpg" alt="">
+                                            <a href="author.php" class="image">
+                                                <img src="assets/img/author/1.jpg" id="sideAuthorImg" alt="">
                                             </a>
                                         </div>
                                         <div class="author-content">
-                                            <h6 class="name"> Hi, I'm David Smith</h6>
+                                            <h6 class="name" id="sideAuthorName"> Hi, I'm Djoko Keita</h6>
                                             <p class="bio">
-                                                I'm David Smith, husband and father ,
-                                                I love Photography,travel and nature. I'm working as a writer and blogger with experience
-                                                of 5 years until now.
+                                                I'm Djoko Keita, Web Developer and learner,
+                                                i am interested in all things JavaScript, so this blog is for my exploration.
                                             </p>
                                             <div class="social-media">
                                                 <ul class="list-inline">
@@ -331,7 +325,7 @@ if (!isset($_GET["id"])) {
                                     <div class="section-title">
                                         <h5>Latest Posts</h5>
                                     </div>
-                                    <ul class="widget-latest-posts">
+                                    <ul class="widget-latest-posts" id="latestPosts">
 
                                         <li class="post-item">
                                             <div class="image">
@@ -396,7 +390,7 @@ if (!isset($_GET["id"])) {
                                     <div class="section-title">
                                         <h5>Categories</h5>
                                     </div>
-                                    <ul class="widget-categories">
+                                    <ul class="widget-categories" id="categoriesLinks">
                                         <li>
                                             <a href="#" class="categorie">Livestyle</a>
                                             <span class="ml-auto">22 Posts</span>
@@ -425,109 +419,10 @@ if (!isset($_GET["id"])) {
                                     </ul>
                                 </div>
 
-                                <!--widget-instagram-->
-                                <div class="widget">
-                                    <div class="section-title">
-                                        <h5>Instagram</h5>
-                                    </div>
-                                    <ul class="widget-instagram">
-                                        <li>
-                                            <a class="image" href="#">
-                                                <img src="assets/img/instagram/1.jpg" alt="">
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a class="image" href="#">
-                                                <img src="assets/img/instagram/2.jpg" alt="">
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a class="image" href="#">
-                                                <img src="assets/img/instagram/3.jpg" alt="">
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a class="image" href="#">
-                                                <img src="assets/img/instagram/4.jpg" alt="">
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a class="image" href="#">
-                                                <img src="assets/img/instagram/5.jpg" alt="">
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a class="image" href="#">
-                                                <img src="assets/img/instagram/6.jpg" alt="">
-                                            </a>
-                                        </li>
-                                    </ul>
 
-                                </div>
 
-                                <!--widget-tags-->
-                                <div class="widget">
-                                    <div class="section-title">
-                                        <h5>Tags</h5>
-                                    </div>
-                                    <div class="widget-tags">
-                                        <ul class="list-inline">
-                                            <li>
-                                                <a href="blog-grid.html">Travel</a>
-                                            </li>
-                                            <li>
-                                                <a href="blog-grid.html">Nature</a>
-                                            </li>
-                                            <li>
-                                                <a href="blog-grid.html">tips</a>
-                                            </li>
-                                            <li>
-                                                <a href="blog-grid.html">forest</a>
-                                            </li>
-                                            <li>
-                                                <a href="blog-grid.html">beach</a>
-                                            </li>
-                                            <li>
-                                                <a href="blog-grid.html">fashion</a>
-                                            </li>
-                                            <li>
-                                                <a href="blog-grid.html">livestyle</a>
-                                            </li>
-                                            <li>
-                                                <a href="blog-grid.html">healty</a>
-                                            </li>
-                                            <li>
-                                                <a href="blog-grid.html">food</a>
-                                            </li>
-                                            <li>
-                                                <a href="blog-grid.html">breakfast</a>
-                                            </li>
-                                            <li>
-                                                <a href="blog-grid.html">tips & hacks</a>
-                                            </li>
-                                            <li>
-                                                <a href="blog-grid.html">nutrition</a>
-                                            </li>
-                                            <li>
-                                                <a href="blog-grid.html">cake</a>
-                                            </li>
 
-                                        </ul>
-                                    </div>
-                                </div>
-                                <!--/-->
 
-                                <!--widget-ads-->
-                                <div class="widget">
-                                    <div class="section-title">
-                                        <h5>ads</h5>
-                                    </div>
-                                    <div class="widget-ads">
-                                        <a href="#">
-                                            <img src="assets/img/ads/ads3.jpg" alt="">
-                                        </a>
-                                    </div>
-                                </div>
 
                             </div>
                         </div>
@@ -603,17 +498,21 @@ if (!isset($_GET["id"])) {
         const postCategoryDisp = document.querySelector("#postCategoryDisp")
         const authorName = document.querySelector("#authorName")
         const authorImg = document.querySelector("#authorImg")
+        const sideAuthorImg = document.querySelector("#sideAuthorImg")
+        const sideAuthorName = document.querySelector("#sideAuthorName")
+        const addCommentForm = document.querySelector("#addCommentForm")
+        const addCommentBtn = document.querySelector("#addCommentBtn")
         // Initialize All Categoires in local storage
-        if (!localStorage.getItem("solitdioCategories")) {
+        if (!sessionStorage.getItem("solitdioCategories")) {
             $.post("php/category/getAllCategory.inc.php", {
                 getAllCategorySubmit: "action"
             }, function(data) {
                 if (isJson(data)) {
-                    localStorage.setItem('solitdioCategories', data)
+                    sessionStorage.setItem('solitdioCategories', data)
                 }
             })
         }
-        const categories = JSON.parse(localStorage.getItem("solitdioCategories"))
+        const categories = JSON.parse(sessionStorage.getItem("solitdioCategories"))
 
         $.post("php/posts/getOnePost.inc.php", {
             getOnePostSubmit: "action",
@@ -625,7 +524,7 @@ if (!isset($_GET["id"])) {
                 postMainImg.src = post.img
                 postTitle.textContent = post.name
                 postCategoryDisp.textContent = postCat.name
-                postDate.innerHTML = ` <span class="dot"></span> ${post.created_at}`
+                postDate.innerHTML = ` <span class="dot"></span> ${post.created_at.slice(0,15)}`
 
 
                 //Get author
@@ -637,6 +536,14 @@ if (!isset($_GET["id"])) {
                         const author = JSON.parse(data)[0]
 
                         authorName.textContent = author.username
+                        sideAuthorName.textContent = 'Hi, i am ' + author.username
+                        if (!author.img) {
+                            authorImg.src = "assets/img/user/profile.webp"
+                            sideAuthorImg.src = "assets/img/user/profile.webp"
+                        } else {
+                            authorImg.src = author.img
+                            sideAuthorImg.src = author.img
+                        }
                     }
                 })
 
@@ -710,6 +617,154 @@ if (!isset($_GET["id"])) {
 
         })
 
+        function addComment(e) {
+            e.preventDefault();
+            const now = new Date();
+            isLoading(addCommentBtn)
+            $.post("php/comments/addComment.inc.php", {
+                addCommentSubmit: "action",
+                parent: $("#commentParent").val(),
+                author: $("#commentAuth").val(),
+                body: $("#message").val(),
+                created_at: now.toString(),
+                post: id
+            }, function(data) {
+                if (data !== "Success") {
+                    feedBack(data, "error")
+                    loaded(addCommentBtn, "Send Comment")
+                } else {
+                    $("#commentSuccess").show();
+                    addCommentForm.reset()
+                    setTimeout(() => {
+                        $("#commentSuccess").hide();
+                    }, 3000)
+                    loaded(addCommentBtn, "Send Comment")
+                    getPostComments()
+                }
+            })
+        }
+
+
+        // Ecent Listeners
+        addCommentForm.addEventListener("submit", addComment)
+
+
+        //Function not triggered by DOM
+        getPostComments()
+        if (!sessionStorage.getItem("solitdioPosts")) {
+            getPosts()
+        } else {
+            const posts = JSON.parse(sessionStorage.getItem("solitdioPosts"))
+            const latestPosts = document.getElementById("latestPosts")
+            let limit
+            if (posts.length < 5) {
+                limit = posts.length
+            } else {
+                limit = 5
+            }
+            latestPosts.innerHTML = ``
+            for (let i = 0; i < limit; i++) {
+                const li = document.createElement("li")
+                li.classList.add("post-item")
+                li.innerHTML = `
+                 <div class="image">
+                                                <a href="postDetails.php?id=${posts[i].id}"> <img src="${posts[i].img}" alt="${posts[i].name}"></a>
+                                            </div>
+                                           
+                                            <div class="content">
+                                                <p class="entry-title"><a href="postDetails.php?id=${posts[i].id}">${posts[i].name}</a></p>
+                                                <small class="post-date"><i class="fas fa-clock"></i>${posts[i].created_at.slice(0,15)}</small>
+                                            </div>
+                `
+                latestPosts.appendChild(li)
+
+            }
+            // Categories links
+            const categoriesLinks = document.getElementById("categoriesLinks")
+            categoriesLinks.innerHTML = ``
+            categories.forEach(category => {
+                //console.log(category.id)
+                const postCount = posts.filter(post => post.category == category.id).length
+                const li = document.createElement("li")
+                li.innerHTML = `
+                 <li>
+                    <a href="#" class="categorie">${category.name}</a>
+                    <span class="ml-auto">${postCount} Posts</span>
+                    </li>
+                `
+                categoriesLinks.appendChild(li)
+            })
+
+
+
+
+        }
+
+        function getPostComments() {
+            const commentsContainer = document.getElementById("commentsContainer")
+            commentsContainer.innerHTML = ``
+
+            $.post("php/comments/getPostComments.inc.php", {
+                getPostCommentsSubmit: "action",
+                post: id
+            }, function(data) {
+                if (data === "No posts!") {
+                    document.getElementById("commentTitle").textContent = `0 Comments`
+
+                } else if (isJson(data)) {
+                    const comments = JSON.parse(data)
+                    document.getElementById("commentTitle").textContent = `${comments.length} Comments`
+                    comments.forEach(comment => {
+                        //get author
+                        $.post("php/users/getAuthor.inc.php", {
+                            getAuthorSubmit: "action",
+                            id: comment.author
+                        }, function(data) {
+                            if (!isJson(data)) {
+                                feedBack(data, "error")
+                            } else {
+                                const author = JSON.parse(data)[0]
+                                const profileImg = author.img ? author.img : "assets/img/user/profile.webp"
+                                const li = document.createElement('li')
+                                li.classList.add("comment-item")
+                                li.innerHTML = ` <img src="${profileImg}" alt="">
+                                                <div class="content">
+                                                    <ul class="info list-inline">
+                                                        <li>${author.username}</li>
+                                                        <li class="dot"></li>
+                                                        <li> ${comment.created_at.slice(0,15)}</li>
+                                                    </ul>
+                                                    <p>
+                                                     ${comment.body}
+                                                    </p>
+                                                    <div><a href="#" class="btn-link" disabled> <i class="arrow_back"></i> Reply</a></div>
+                                                </div>
+                                            `
+                                commentsContainer.appendChild(li)
+                            }
+                        })
+                    });
+
+                } else {
+                    feedBack(data, "error")
+                }
+            })
+
+        }
+
+        function getPosts() {
+            $.post("php/posts/getAllPosts.inc.php", {
+                getAllPostsSubmit: "action"
+            }, function(data) {
+                if (isJson(data)) {
+                    sessionStorage.setItem("solitdioPosts", data)
+                    displayPosts(JSON.parse(data))
+                } else {
+                    feedBack(data, "error")
+                }
+            })
+
+        }
 
 
         function feedBack(message, type) {
@@ -718,6 +773,16 @@ if (!isset($_GET["id"])) {
             } else {
                 Swal.fire('feedBack', 'Type error in feddback!', 'error')
             }
+        }
+
+        function isLoading(el) {
+            el.innerHTML = `<div class="spinner-border" role="status">
+                                     <span class="visually-hidden">Loading...</span>
+                                     </div>`
+        }
+
+        function loaded(el, txtCnt) {
+            el.innerHTML = `${txtCnt}`
         }
 
         function isJson(item) {

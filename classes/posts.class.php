@@ -11,10 +11,9 @@ class Posts extends Dbh
     }
     protected function getAllPosts()
     {
-        $sql = "SELECT * FROM `posts` WHERE 1 ORDER `id` BY DESC";
+        $sql = "SELECT * FROM `posts` WHERE 1 ORDER BY `id` DESC";
         $stmt = $this->connect()->prepare($sql);
         $stmt->execute() or die(print_r($stmt->errorInfo(), true));
-
         $result = $stmt->fetchAll();
         return $result;
     }

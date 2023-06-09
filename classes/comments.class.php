@@ -12,7 +12,7 @@ class Comments extends Dbh
     }
     protected function getCommentsByPost($post)
     {
-        $sql = "SELECT * FROM `comments` WHERE 1 ORDER `id` BY DESC";
+        $sql = "SELECT * FROM `comments` WHERE `post`=? ORDER BY `id` DESC";
         $stmt = $this->connect()->prepare($sql);
         $stmt->execute([$post]) or die(print_r($stmt->errorInfo(), true));
         $result = $stmt->fetchAll();
@@ -20,7 +20,7 @@ class Comments extends Dbh
     }
     protected function getCommentsByAuthor($author)
     {
-        $sql = "SELECT * FROM `comments` WHERE `autor`=? ORDER `id` BY DESC";
+        $sql = "SELECT * FROM `comments` WHERE `autor`=? ORDER BY `id` DESC";
         $stmt = $this->connect()->prepare($sql);
         $stmt->execute([$author]) or die(print_r($stmt->errorInfo(), true));
         $result = $stmt->fetchAll();
@@ -28,7 +28,7 @@ class Comments extends Dbh
     }
     protected function getCommentsByParent($parent)
     {
-        $sql = "SELECT * FROM `comments` WHERE `parent`=? ORDER `id` BY DESC";
+        $sql = "SELECT * FROM `comments` WHERE `parent`=? ORDER BY `id` DESC";
         $stmt = $this->connect()->prepare($sql);
         $stmt->execute([$parent]) or die(print_r($stmt->errorInfo(), true));
         $result = $stmt->fetchAll();
