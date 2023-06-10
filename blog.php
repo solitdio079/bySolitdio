@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <!doctype html>
 <html lang="en">
 
@@ -487,6 +491,7 @@
     <script src="assets/js/theia-sticky-sidebar.min.js"></script>
     <script src="assets/js/ajax-contact.js"></script>
     <script src="assets/js/switch.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.10/dist/sweetalert2.all.min.js"></script>
 
     <!-- JS main  -->
     <script src="assets/js/main.js"></script>

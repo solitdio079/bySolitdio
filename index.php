@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <!doctype html>
 <html lang="en">
 
@@ -575,6 +579,7 @@
     <script src="assets/js/theia-sticky-sidebar.min.js"></script>
     <script src="assets/js/ajax-contact.js"></script>
     <script src="assets/js/switch.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.10/dist/sweetalert2.all.min.js"></script>
 
     <!-- JS main  -->
     <script src="assets/js/main.js"></script>
@@ -627,14 +632,20 @@
                             getPostCommentsSubmit: "action",
                             post: post.id
                         }, function(data) {
-                            if (!isJson(data)) {
-                                feedBack(data, "error")
+                            let comments = []
+                            if (data === "No comments!") {
+                                comments = []
+                            } else if (isJson(data)) {
+                                comments = JSON.parse(data)
                             } else {
-                                const comments = JSON.parse(data)
-                                const div = document.createElement("div")
-                                div.classList = "swiper-slide slider-item"
-                                div.style.backgroundImage = `url(${post.img})`
-                                div.innerHTML = `
+                                feedback(data, "error")
+                                return
+                            }
+
+                            const div = document.createElement("div")
+                            div.classList = "swiper-slide slider-item"
+                            div.style.backgroundImage = `url(${post.img})`
+                            div.innerHTML = `
                      <div class="container-fluid">
                                 <div class="row">
                                     <div class="col-lg-7">
@@ -663,13 +674,13 @@
                                 </div>
                             </div>
                     `
-                                heroSwiper.appendChild(div)
+                            heroSwiper.appendChild(div)
 
 
-                                //Bottom swiper
-                                const divBottom = document.createElement('div')
-                                divBottom.classList = "swiper-slide"
-                                divBottom.innerHTML = `
+                            //Bottom swiper
+                            const divBottom = document.createElement('div')
+                            divBottom.classList = "swiper-slide"
+                            divBottom.innerHTML = `
                             <div class="post-item">
                                 <img src="${post.img}" alt="">
                                 <div class="details">
@@ -683,9 +694,9 @@
                             </div>
                         
                                 `
-                                heroSwiperBottom.appendChild(divBottom)
+                            heroSwiperBottom.appendChild(divBottom)
 
-                            }
+
 
                         })
 
