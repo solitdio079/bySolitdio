@@ -69,7 +69,7 @@ session_start();
                     <div class="row">
                         <div class="col-xl-9 mt-30 side-content">
                             <div class="theiaStickySidebar">
-                                <div class="row masonry-items" id="postsContainer">
+                                <div class="row" id="postsContainer">
                                     <!--Post-1-->
                                     <div class="col-lg-6 col-md-6 masonry-item">
                                         <div class="post-card ">
@@ -341,53 +341,7 @@ session_start();
                             <div class="theiaStickySidebar">
                                 <!--widget-latest-posts-->
 
-                                <!--widget-author-->
-                                <div class="widget">
-                                    <div class="widget-author">
-                                        <div class="author-img">
-                                            <a href="author.php" class="image">
-                                                <img src="assets/img/author/1.jpg" id="sideAuthorImg" alt="">
-                                            </a>
-                                        </div>
-                                        <div class="author-content">
-                                            <h6 class="name" id="sideAuthorName"> Hi, I'm Djoko Keita</h6>
-                                            <p class="bio">
-                                                I'm Djoko Keita, Web Developer and learner,
-                                                i am interested in all things JavaScript, so this blog is for my exploration.
-                                            </p>
-                                            <div class="social-media">
-                                                <ul class="list-inline">
-                                                    <li>
-                                                        <a href="#" class="color-facebook">
-                                                            <i class="fab fa-facebook"></i>
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#" class="color-instagram">
-                                                            <i class="fab fa-instagram"></i>
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#" class="color-twitter">
-                                                            <i class="fab fa-twitter"></i>
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#" class="color-youtube">
-                                                            <i class="fab fa-youtube"></i>
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#" class="color-pinterest">
-                                                            <i class="fab fa-pinterest"></i>
-                                                        </a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!--/-->
+
 
 
                                 <div class="widget ">
