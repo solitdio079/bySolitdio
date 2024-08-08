@@ -1,5 +1,10 @@
+import { useEffect } from "react"
 import { useFetcher } from "react-router-dom"
-import Toastify from 'toastify-js'
+import toast, { Toaster } from 'react-hot-toast'
+
+
+
+ 
 
 export async function action({request}) {
   const formData = await request.formData()
@@ -28,6 +33,20 @@ export async function action({request}) {
 }
 export default function Login() {
   const fetcher = useFetcher()
+  const toastOptions = {
+    duration: 5000,
+   
+  }
+  useEffect(() => {
+   
+    fetcher.data
+      ? fetcher.data.msg
+        ? toast.success(fetcher.data.msg, toastOptions)
+        : toast.error(fetcher.data, toastOptions)
+      : ''
+   
+    
+  }, [fetcher])
     return (
       <div className="hero bg-base-200 m-5">
         <div className="hero-content flex-col">
@@ -50,29 +69,18 @@ export default function Login() {
                   name="email"
                   required
                 />
-                {fetcher.data ? Toastify({
-  text: fetcher.data.msg,
-  duration: 3000,
-  destination: "https://mail.google.com",
-  newWindow: true,
-  close: true,
-  gravity: "top", // `top` or `bottom`
-  position: "left", // `left`, `center` or `right`
-  stopOnFocus: true, // Prevents dismissing of toast on hover
-  style: {
-    background: "linear-gradient(to right, #00b09b, #96c93d)",
-  },
-  onClick: function(){} // Callback after click
-}).showToast(): ''}
+                
+                <Toaster />
               </div>
 
               <div className="form-control mt-6">
                 <button className="btn btn-primary">
                   {' '}
                   {fetcher.state === 'submitting' ? (
-                    ( <span className="loading loading-infinity loading-md"></span>)
-                  ) : 'Login' 
-                  }
+                    <span className="loading loading-infinity loading-md"></span>
+                  ) : (
+                    'Login'
+                  )}
                 </button>
               </div>
             </fetcher.Form>
