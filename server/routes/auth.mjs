@@ -11,20 +11,38 @@ router.get("/", (req, res) => {
 
 
 // Sending email requests and getting status messages
-router.post("/login/email", passport.authenticate('magiclink', { action: 'requestToken', failureRedirect: '/auth/login/sendFailed'}), (req, res) => {
-    res.redirect("/auth/login/sendSuccessful")
+router.post("/login/email", passport.authenticate('magiclink', { action: 'requestToken', failureMessage: 'Email Not Sent'}), (req, res) => {
+   res.send({ msg: 'Email sent!' })
 })
-router.get('/login/sendSuccessful', (req, res) => {
-  res.send({ msg: 'Email sent!' })
-})
-router.get('/login/sendFailed', (req, res) => {
-    res.send({msg: "Email not sent!"})
-})
+
+
 // verifying link send by email
 
-router.post("/login/email/verify", passport.authenticate('magiclink', { successReturnToOrRedirect: '/', failureRedirect: '/auth/login/verifyFailed' }))
-router.get('/login/verifyFailed', (req, res) => {
-    res.send('Token invalid')
-})
+router.get("/login/email/verify", passport.authenticate('magiclink', { successReturnToOrRedirect: '/' , failureMessage: 'Token Invalid'}))
 
+
+//logout
+
+router.post('/logout', function (req, res, next) {
+  req.logout(function (err) {
+    if (err) {
+      return next(err)
+    }
+    res.redirect('/')
+  })
+})
 export default router
+
+
+/*Oven
+Near
+Valid
+Seed
+Minor
+Pink
+Goose
+Someone
+Soldier
+Bonus
+Festival
+Fringe*/

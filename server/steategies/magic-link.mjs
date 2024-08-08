@@ -2,12 +2,13 @@ import passport from 'passport'
 import MagicLink from 'passport-magic-link'
 import sendgrid from '@sendgrid/mail'
 import Users from '../models/users.mjs'
+import {} from 'dotenv/config'
 
 const MagicLinkStrategy = MagicLink.Strategy
+ 
 
 
-
-sendgrid.setApiKey(process.env['SENDGRID_API_KEY'])
+sendgrid.setApiKey(process.env.SENDGRID_API_KEY)
 
 passport.use(
   new MagicLinkStrategy(
@@ -18,7 +19,7 @@ passport.use(
       verifyUserAfterToken: true,
     },
     function send(user, token) {
-      var link = 'http://localhost:5500/login/email/verify?token=' + token
+      var link = 'http://localhost:5500/auth/login/email/verify?token=' + token
       var msg = {
         to: user.email,
         from: process.env.EMAIL,
@@ -54,3 +55,14 @@ passport.use(
     }
   )
 )
+passport.serializeUser(function (user, cb) {
+  process.nextTick(function () {
+    cb(null, { id: user.id, email: user.email })
+  })
+})
+
+passport.deserializeUser(function (user, cb) {
+  process.nextTick(function () {
+    return cb(null, user)
+  })
+})
