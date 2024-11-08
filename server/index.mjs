@@ -1,12 +1,15 @@
 import express from 'express'
 import mongoose from 'mongoose'
-import authRouter from './routes/auth.mjs'
+
+
 import passport from 'passport'
 import session from 'express-session'
 import MongoStore from 'connect-mongo'
 import cookieParser from 'cookie-parser'
 import cors from 'cors'
-
+// Routers
+import authRouter from './routes/auth.mjs'
+import admincategoryRouter from './routes/admin/categories.mjs'
 
 
 const corsOptions = {
@@ -15,6 +18,7 @@ const corsOptions = {
   ,
   //credentials: true,
   optionsSuccessStatus: 200,
+  credentials: true
 }
 
 try {
@@ -43,6 +47,7 @@ app.use(
 app.use(passport.initialize())
 app.use(passport.session())
 app.use('/auth', authRouter)
+app.use('/admin/category', admincategoryRouter)
 
 const port = process.env.PORT || 5500
 
@@ -52,5 +57,5 @@ app.get("/", (req, res) => {
 
 
 app.listen(port, () => {
-    console.log("Listening to port 5500!");
+    console.log(`Listening to port ${port}`);
 })

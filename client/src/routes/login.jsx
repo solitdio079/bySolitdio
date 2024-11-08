@@ -48,24 +48,24 @@ export default function Login() {
     
   }, [fetcher])
     return (
-      <div className="hero bg-base-200 m-5">
+      <div className="hero w-full">
         <div className="hero-content flex-col">
-          <div className="text-center ">
+          <div className="text-center text-white">
             <h1 className="text-5xl font-bold">Login now!</h1>
             <p className="py-6">
               The verification emeil will be sent to your inbox.
             </p>
           </div>
-          <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
+          <div className="card  card-bordered w-full max-w-sm shrink-0 shadow-2xl">
             <fetcher.Form method="post" className="card-body">
               <div className="form-control">
                 <label className="label">
-                  <span className="label-text">Email</span>
+                  <span className="label-text text-white">Email</span>
                 </label>
                 <input
                   type="email"
                   placeholder="email"
-                  className="input input-bordered"
+                  className="input input-bordered text-white bg-transparent border border-white"
                   name="email"
                   required
                 />
@@ -74,7 +74,7 @@ export default function Login() {
               </div>
 
               <div className="form-control mt-6">
-                <button className="btn btn-primary">
+                <button className="btn btn-primary text-white">
                   {' '}
                   {fetcher.state === 'submitting' ? (
                     <span className="loading loading-infinity loading-md"></span>

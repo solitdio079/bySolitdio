@@ -57,7 +57,7 @@ passport.use(
 )
 passport.serializeUser(function (user, cb) {
   process.nextTick(function () {
-    cb(null, { id: user.id, email: user.email })
+    cb(null, user)
   })
 })
 
