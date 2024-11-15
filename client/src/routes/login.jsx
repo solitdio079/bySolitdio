@@ -2,10 +2,6 @@ import { useEffect } from "react"
 import { useFetcher } from "react-router-dom"
 import toast, { Toaster } from 'react-hot-toast'
 
-
-
- 
-
 export async function action({request}) {
   const formData = await request.formData()
   const bodyObject = Object.fromEntries(formData)

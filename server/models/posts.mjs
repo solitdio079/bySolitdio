@@ -5,9 +5,7 @@ const postSchema = new Schema({
         type: String,
         required: true
     },
-    image: String,
-    video_link: String,
-    constent: {
+    content: {
         type: String,
         required: true
     },
@@ -19,6 +17,7 @@ const postSchema = new Schema({
     category: {
         name: String
     },
+    images: {type: Array, default: null },
     comments: Array,
 }, { timestamps: true })
 

@@ -3,9 +3,9 @@ import { FaEnvelopeOpenText, FaShapes, FaUsers } from 'react-icons/fa6'
 export default function AdminRoot() {
   return (
     <div className="flex flex-col lg:flex-row p-5">
-      <ul className="menu menu-horizontal w-full justify-center lg:w-56 lg:menu-vertical text-white rounded-box">
+      <ul className="menu menu-horizontal w-full justify-center lg:justify-start lg:w-96 lg:menu-vertical text-white rounded-box">
         <li>
-          <NavLink className="btn btn-outline text-white border-white m-2 hover:bg-primary">
+          <NavLink to={"/admin/posts/view"} className="btn btn-outline text-white border-white m-2 hover:bg-primary">
             <FaEnvelopeOpenText className="h-5 w-5" />
             Posts
           </NavLink>

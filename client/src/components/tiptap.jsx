@@ -1,6 +1,7 @@
 import { Color } from '@tiptap/extension-color'
 import ListItem from '@tiptap/extension-list-item'
 import TextStyle from '@tiptap/extension-text-style'
+import Blockquote from '@tiptap/extension-blockquote'
 import { EditorProvider, useCurrentEditor } from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
 //import React from 'react'
@@ -221,7 +222,12 @@ const MenuBar = () => {
 
 // define your extension array
 const extensions = [
-  Color.configure({ types: [TextStyle.name, ListItem.name] }),
+    Color.configure({ types: [TextStyle.name, ListItem.name] }),
+    Blockquote.configure({
+  HTMLAttributes: {
+    class: 'text-white',
+  },
+}),
   TextStyle.configure({ types: [ListItem.name] }),
   StarterKit.configure({
     bulletList: {

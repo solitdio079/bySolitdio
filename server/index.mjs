@@ -1,6 +1,6 @@
 import express from 'express'
 import mongoose from 'mongoose'
-
+import 'dotenv/config'
 
 import passport from 'passport'
 import session from 'express-session'
@@ -9,7 +9,8 @@ import cookieParser from 'cookie-parser'
 import cors from 'cors'
 // Routers
 import authRouter from './routes/auth.mjs'
-import admincategoryRouter from './routes/admin/categories.mjs'
+import adminCategoryRouter from './routes/admin/categories.mjs'
+import adminPostRouter from './routes/admin/posts.mjs'
 
 
 const corsOptions = {
@@ -22,7 +23,7 @@ const corsOptions = {
 }
 
 try {
-    const connection = await mongoose.connect('mongodb://127.0.0.1:27017/bySolitdio')
+    const connection = await mongoose.connect(process.env.MongoDB_URI)
     console.log('Database connected')
 } catch {
     console.log("Error occured");
@@ -46,8 +47,10 @@ app.use(
 )
 app.use(passport.initialize())
 app.use(passport.session())
+app.use(express.static("public"))
 app.use('/auth', authRouter)
-app.use('/admin/category', admincategoryRouter)
+app.use('/admin/category', adminCategoryRouter)
+app.use('/admin/post', adminPostRouter)
 
 const port = process.env.PORT || 5500
 
