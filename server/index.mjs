@@ -14,12 +14,11 @@ import adminPostRouter from './routes/admin/posts.mjs'
 
 
 const corsOptions = {
-  origin:'https://bysolitdio.net'
+  origin: ['https://bysolitdio.net', 'https://www.bysolitdio.net'],
 
-  ,
   //credentials: true,
   optionsSuccessStatus: 200,
-  credentials: true
+  credentials: true,
 }
 
 try {
