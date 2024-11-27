@@ -49,7 +49,7 @@ export default function Login() {
           <div className="text-center text-white">
             <h1 className="text-5xl font-bold">Login now!</h1>
             <p className="py-6">
-              The verification emeil will be sent to your inbox.
+              The verification email will be sent to your inbox.
             </p>
           </div>
           <div className="card  card-bordered w-full max-w-sm shrink-0 shadow-2xl">

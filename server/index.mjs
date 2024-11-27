@@ -14,7 +14,7 @@ import adminPostRouter from './routes/admin/posts.mjs'
 
 
 const corsOptions = {
-  origin:'http://localhost:5173'
+  origin:'https://bysolitdio.net'
 
   ,
   //credentials: true,

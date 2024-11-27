@@ -142,4 +142,22 @@ router.put("/:id",  checkIfAdmin, checkSchema(postValidator),async (req, res) =>
         return res.send({error: error.message})
     }
 })
+
+router.delete('/:id', async (req, res) => {
+  const { id } = req.params
+  try {
+    // Get post to be updated
+    const oldPost = await Posts.findById(id)
+    if (!oldPost) return res.send({ error: `Post with ${id} not found!` })
+    // Remove Images
+    oldPost.images.forEach((item) => {
+      fs.unlinkSync(destination + item)
+    })
+
+    await Posts.findByIdAndDelete(id)
+    return res.send({ msg: 'post supprime!' })
+  } catch (error) {
+    return res.send({ error: error.message })
+  }
+})
 export default router
