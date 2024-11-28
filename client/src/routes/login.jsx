@@ -1,6 +1,7 @@
 import { useEffect } from "react"
 import { useFetcher } from "react-router-dom"
 import toast, { Toaster } from 'react-hot-toast'
+import { url } from "../utils/serverUrl"
 
 export async function action({request}) {
   const formData = await request.formData()
@@ -8,7 +9,7 @@ export async function action({request}) {
 
   console.log(bodyObject);
   try {
-    const response = await fetch('http://localhost:5500/auth/login/email', {
+    const response = await fetch( url+ '/auth/login/email', {
       method: 'POST',
       mode: 'cors',
       //credentials: 'include',
